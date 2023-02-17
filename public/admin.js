@@ -159,7 +159,7 @@ const addAllMarkers=(a,b)=>{
 }
 
 
-const placesarr=[];
+
 let inpdata;
 
 
@@ -191,7 +191,7 @@ let inpdata;
 const confirmtion=confirm(` Are you sure save this place :${inpdata}`);
         if(confirmtion && inpdata!="")
         {
-            placesarr.push(inpdata);
+         
             
             // console.log(` from front end ${inpdata} `);
             // console.log(` from front end ${e.latlng.lat} `);
@@ -201,8 +201,8 @@ const confirmtion=confirm(` Are you sure save this place :${inpdata}`);
 
             
             (async () => {
-                try{
-                const dataFromServer = await fetch('/places', {
+                try{   // During Development  BASE_URL=http://127.0.0.1:6969
+                const dataFromServer = await fetch(`http://127.0.0.1:6969/places`, {
                   method: 'POST',
                   headers: {
                     'Accept': 'application/json',
@@ -210,7 +210,7 @@ const confirmtion=confirm(` Are you sure save this place :${inpdata}`);
                   },
                   body: JSON.stringify(
                     {
-                    places :inpdata,
+                    place :inpdata,
                     latitude :e.latlng.lat,
                     longitude : e.latlng.lng,
                 
@@ -222,7 +222,8 @@ const confirmtion=confirm(` Are you sure save this place :${inpdata}`);
               if(content ) 
               {
                 console.log(content);
-                alert(`Your data has been saved as in Database`)
+                alert(`Your data has been saved  `)
+                window.location.reload(false);
               }
 
                 
@@ -233,15 +234,14 @@ const confirmtion=confirm(` Are you sure save this place :${inpdata}`);
                  
               //  
                  // after this update the place with marker and refresh the page 
-                 map_init.removeLayer(mymarker);
-                 markerArr.pop()
+                 
                 //const marker=L.marker(content.DB[0].latitude,content.DB[0].longitude).addTo(map_init)
     
             }
             catch(err){
                 console.log(err);
                 console.log(err.message);
-                alert('Location Name already exists')
+                alert('Error occured While Adding !  Try Again')
                 window.location.reload();
             }
               })();
@@ -282,8 +282,8 @@ const confirmtion=confirm(` Are you sure save this place :${inpdata}`);
      });
            
     })        
-    
-    fetch(`http://127.0.0.1:6969/locations/all`).then((response)=>{return response.json()}).then((data)=>{
+    // During Development  BASE_URL=http://127.0.0.1:6969
+    fetch(`https://mapify-7kzf.onrender.com/all`).then((response)=>{return response.json()}).then((data)=>{
 
 data.map((object)=>{
     // console.log(object);

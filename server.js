@@ -112,5 +112,5 @@ app.use('/locations/all',getAllLocationsRouteHandler)  // only get route present
 // running server
 
 app.listen(port,()=>{
-    console.log((`server running on port http://127.0.0.1:${port}`));
+console.log((`server running on port ${process.env.BASE_URL}`));
 })

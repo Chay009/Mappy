@@ -112,7 +112,8 @@ function showResults(val) {
     return;
   }
   let placeList = '';
-  fetch(`http://127.0.0.1:6969/suggest?q=${val}`).then(
+              // During Development  BASE_URL=http://127.0.0.1:6969
+  fetch(`https://mapify-7kzf.onrender.com/suggest?q=${val}`).then(
    function (response) {
      return response.json();
    }).then(function (data) {
@@ -204,8 +205,8 @@ document.querySelector('.icon').addEventListener('click',()=>{
 // });
    let point=document.querySelector('.search-suggest').value;
 
-
-  fetch(`http://127.0.0.1:6969/maproute/location?q=${point}`).then((response)=>{return response.json()}).then((data)=>{
+ // During Development  BASE_URL=http://127.0.0.1:6969
+  fetch(`https://mapify-7kzf.onrender.com/maproute/location?q=${point}`).then((response)=>{return response.json()}).then((data)=>{
     placeInfo=data;
     // console.log(placeInfo[0]);
     // alert(placeInfo[0].place)

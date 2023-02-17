@@ -9,7 +9,7 @@ const mongoose = require('mongoose');
 const searchSuggester=(req, res)=> {
     //console.log(req.query.q);
   
-    const searchResults=req.query.q.trim();
+    const searchResults=req.query.q.trim().toLowerCase();
    console.log(searchResults);
    
   

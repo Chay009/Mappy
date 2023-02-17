@@ -7,7 +7,7 @@ const postMyPlace=(req,res)=>{
   try{
     let placeFromClient={
     
-      place : req.body.places.toLowerCase(),
+      place : req.body.place.toLowerCase(),
       latitude : req.body.latitude,
       longitude : req.body.longitude,
       

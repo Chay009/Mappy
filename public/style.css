@@ -21,63 +21,6 @@ border: red solid 3px;
 }
 
 
-body {
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    position: relative;
-    background: #1e1e24;
-    align-items: center;
-    justify-content: center;
-}
-.btn-flip {
-    opacity: 1;
-    outline: 0;
-    color: #fff;
-    line-height: 40px;
-    position: relative;
-    text-align: center;
-    letter-spacing: 1px;
-    display: inline-block;
-    text-decoration: none;
-    font-family: 'Open Sans';
-    text-transform: uppercase;
-}
-.btn-flip:hover:after {
-    opacity: 1;
-    transform: translateY(0) rotateX(0);
-}
-.btn-flip:hover:before {
-    opacity: 0;
-    transform: translateY(50%) rotateX(90deg);
-}
-.btn-flip:after {
-    top: 0;
-    left: 0;
-    opacity: 0;
-    width: 100%;
-    color: #323237;
-    display: block;
-    transition: 0.5s;
-    position: absolute;
-    background: #adadaf;
-    content: attr(data-back);
-    transform: translateY(-50%) rotateX(90deg);
-}
-.btn-flip:before {
-    top: 0;
-    left: 0;
-    opacity: 1;
-    color: #adadaf;
-    display: block;
-    padding: 0 30px;
-    line-height: 40px;
-    transition: 0.5s;
-    position: relative;
-    background: #323237;
-    content: attr(data-front);
-    transform: translateY(0) rotateX(0);
-}
 
 
 
@@ -120,7 +63,7 @@ body{
 }
 
 .wrapper{
-  max-width: 450px;
+  max-width: 75vw;
   margin: 0px auto;
 }
 
@@ -262,10 +205,20 @@ visibility: hidden;
   text-decoration: none;
 }
 
+.code{
+  color: rgba(248, 241, 241, 0.845);
+  height: 3.5vh;
+  padding: 3px;
+}
+.adminBtn{
+  height: 3vh;
+  width: 60px;
+}
+
 /* CORE STYLES   menu bar */
 :root {
-  --primary-color: rgb(21, 153, 151);
-  --overlay-color: rgba(24, 39, 51 , 0.85);
+  --primary-color: rgb(102, 51, 174);
+  --overlay-color: rgba(0, 77, 99, 0.85);
   --menu-speed: 0.75s;
 }
 
@@ -326,7 +279,7 @@ body {
   display: inline-block;
   border: none;
   background: var(--primary-color);
-  color: #fff;
+  color: #0a0808;
   padding: 0.75rem 1.5rem;
   margin-top: 1rem;
   transition: opacity 1s ease-in-out;
@@ -358,7 +311,7 @@ body {
 
 .menu-wrap .hamburger {
   position: absolute;
-  top: 0;
+  top: 0.5rem;
   left: 0;
   z-index: 1;
   width: 60px;
