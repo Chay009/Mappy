@@ -32,7 +32,7 @@ console.log(path.join(__dirname, 'public'));
 app.use(cors());   // third party middleware
 
 
-const connectDB=require('../mappy/database/db');
+const connectDB=require('./database/db');
 //connecting to database
 // turn on db connection by uncommenting
 
