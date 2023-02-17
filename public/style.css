@@ -203,21 +203,24 @@ visibility: hidden;
   display: none;
   color: white;
   text-decoration: none;
+  padding-top: 10px;
 }
 
 .code{
-  color: rgba(248, 241, 241, 0.845);
-  height: 3.5vh;
+  color: rgb(0, 0, 0);
+  background-color: #ccc;
+  height: 30px;
   padding: 3px;
+   
 }
 .adminBtn{
-  height: 3vh;
+  height: 25px;
   width: 60px;
 }
 
 /* CORE STYLES   menu bar */
 :root {
-  --primary-color: rgb(102, 51, 174);
+  --primary-color: rgb(42, 173, 134);
   --overlay-color: rgba(0, 77, 99, 0.85);
   --menu-speed: 0.75s;
 }

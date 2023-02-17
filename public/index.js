@@ -8,7 +8,7 @@ var map_init = L.map('map', {
     center: [23.814296468133172, 86.44118417874446],
    
  
-    zoom: 16.5,
+    zoom: 16,
     markerZoomAnimation :true,
 });
 map_init.zoomControl.remove();
