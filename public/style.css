@@ -154,9 +154,10 @@ body{
 .search-input .cross{
 visibility: hidden;
   position: absolute;
+  border-radius: 50%;
   right: 60px;
-  top: 0px;
-  height: 50px;
+  top: 15px;
+  height: 20px;
   width: 20px;
   text-align: center;
   line-height: 55px;
@@ -164,17 +165,23 @@ visibility: hidden;
  
   color: black;
  opacity: 0.6;
+ background-color: #fbf7f7;
 
   
   cursor: pointer;
+}
+#mark{
+  position: relative;
+  bottom: 18px;
 }
 
 
 
 .leaflet-routing-container{
-  top: 70vh;
+  top: 60vh;
   right: 20vw;
   z-index: 999;
+  height : 300px;
   
 }
 
@@ -191,6 +198,7 @@ visibility: hidden;
 .leaflet-routing-alt {
  
   width: 70vw;
+  
   border-bottom: 1px solid #ccc;
   height: 15vh;
   overflow-y: auto;
@@ -437,3 +445,27 @@ body {
   transition: color 0.4s ease;
 }
 
+/* for route in map  */
+.pulsating-svg {
+  width: 100%;
+  height: 100%;
+  background-image: url('path/to/pulsating-svg.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.3;
+  }
+  100% {
+    transform: scale(0.8);
+    opacity: 0.7;
+  }
+}
