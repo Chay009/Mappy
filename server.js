@@ -65,10 +65,10 @@ const port=process.env.PORT || 4545;
 
 
   //importing route handlers from  different routes
-const searchRouteHandler=require('../mappy/routes/search.route');
-const placeRouteHandler=require('../mappy/routes/place.route');
-const maplocationRouteHandler=require('../mappy/routes/maplocation.route');
-const getAllLocationsRouteHandler=require('../mappy/routes/getAll.route');
+const searchRouteHandler=require('./routes/search.route');
+const placeRouteHandler=require('./routes/place.route');
+const maplocationRouteHandler=require('./routes/maplocation.route');
+const getAllLocationsRouteHandler=require('./routes/getAll.route');
 
 
 
