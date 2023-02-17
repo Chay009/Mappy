@@ -112,7 +112,7 @@ function showResults(val) {
     return;
   }
   let placeList = '';
-  fetch('http://127.0.0.1:6969/suggest?q=' + val).then(
+  fetch(`http://127.0.0.1:6969/suggest?q=${val}`).then(
    function (response) {
      return response.json();
    }).then(function (data) {

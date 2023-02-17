@@ -3,7 +3,7 @@
 const express = require('express');
  const mongoose=require('mongoose');
 const dotenv=require('dotenv');
-dotenv.config({path : './server/config/.env'})                                                      // initialize dotenv
+dotenv.config({path : '.env'})                                                      // initialize dotenv
 
 const path = require('path'); 
                                                                                                 // gives the current working directory path
@@ -32,7 +32,7 @@ console.log(path.join(__dirname, 'public'));
 app.use(cors());   // third party middleware
 
 
-const connectDB=require('./database/db');
+const connectDB=require('../mappy/database/db');
 //connecting to database
 // turn on db connection by uncommenting
 
@@ -65,10 +65,10 @@ const port=process.env.PORT || 4545;
 
 
   //importing route handlers from  different routes
-const searchRouteHandler=require('./routes/search.route');
-const placeRouteHandler=require('./routes/place.route');
-const maplocationRouteHandler=require('./routes/maplocation.route');
-const getAllLocationsRouteHandler=require('./routes/getAll.route');
+const searchRouteHandler=require('../mappy/routes/search.route');
+const placeRouteHandler=require('../mappy/routes/place.route');
+const maplocationRouteHandler=require('../mappy/routes/maplocation.route');
+const getAllLocationsRouteHandler=require('../mappy/routes/getAll.route');
 
 
 
@@ -85,19 +85,7 @@ const getAllLocationsRouteHandler=require('./routes/getAll.route');
 
 
 
-app.get('/',(req,res)=>{
 
-
-  res.send( JSON.stringify(
-    {
-      welcome : "welcome to the server",
-       place:"  /places to post data about a specific location",
-       maproute :"/maproute/location/?q=placename  query to get the details"
-
-    }
-  ) )
-}
-)
 
 
 

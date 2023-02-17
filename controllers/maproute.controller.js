@@ -5,11 +5,11 @@ const locationModel=require('../models/places.model')
 
 const findLocation=(req,res)=>{
   if(req.query.q){
-    let findLoc=req.query.q.replace(/\s/g,'').trim().toLowerCase();
+    let findLoc=req.query.q;
     console.log(findLoc);
 
 
-    locationModel.find({place : findLoc.replace(/\s/g,'').trim().toLowerCase()},function(error, loc) {
+    locationModel.find({place : findLoc},function(error, loc) {
       if (error) return console.error(err);
       // console.log(` eww ${loc}`);
       res.send(loc);
