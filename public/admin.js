@@ -206,7 +206,7 @@ const confirmtion=confirm(` Are you sure save this place :${inpdata}`);
             
             (async () => {
                 try{   // During Development  BASE_URL=http://127.0.0.1:6969
-                const dataFromServer = await fetch(`http://127.0.0.1:6969/places`, {
+                const dataFromServer = await fetch(`https://mapify-7kzf.onrender.com/places`, {
                   method: 'POST',
                   headers: {
                     'Accept': 'application/json',
@@ -287,7 +287,7 @@ const confirmtion=confirm(` Are you sure save this place :${inpdata}`);
            
     })        
     // During Development  BASE_URL=http://127.0.0.1:6969
-    fetch(`http://127.0.0.1:6969/locations/all`).then((response)=>{return response.json()}).then((data)=>{
+    fetch(`https://mapify-7kzf.onrender.com/locations/all`).then((response)=>{return response.json()}).then((data)=>{
 
 data.map((object)=>{
     // console.log(object);
