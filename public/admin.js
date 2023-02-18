@@ -1,12 +1,12 @@
  
-  
+  let Zoom=16
 
  
 var map_init = L.map('map', {
     center: [23.814296468133172, 86.44118417874446],
    
  
-    zoom: 17.5,
+    zoom: Zoom,
     markerZoomAnimation :true,
 });
 
@@ -14,8 +14,11 @@ var map_init = L.map('map', {
 
 
 var OSM = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+
+
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map_init);
+
 
 
 
@@ -168,6 +171,7 @@ let inpdata;
       
     
         createmarker(e.latlng.lat,e.latlng.lng) 
+        Zoom=17;
      
      
     // if(markersArr.length>1){
@@ -283,7 +287,7 @@ const confirmtion=confirm(` Are you sure save this place :${inpdata}`);
            
     })        
     // During Development  BASE_URL=http://127.0.0.1:6969
-    fetch(`https://mapify-7kzf.onrender.com/locations/all`).then((response)=>{return response.json()}).then((data)=>{
+    fetch(`http://127.0.0.1:6969/locations/all`).then((response)=>{return response.json()}).then((data)=>{
 
 data.map((object)=>{
     // console.log(object);

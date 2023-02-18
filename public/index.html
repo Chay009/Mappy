@@ -6,12 +6,24 @@
 <head>
     
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
 
 
+    <!--PWA  -->
 
-    <!-- ICONS -->
-   
+    <meta name="theme-color" content="#B12A34"> 
+    <!-- it is not so dominnat add same color in manifest -->
+<!-- Ios Support -->
+<link rel="apple-touch-icon" href="./icons/apple-icon-114x114.png">
+<link rel="apple-mobile-web-app-status-bar" content="#aa7700">
+
+<link rel="manifest" href="./manifest.json">
+
+
+    <!--  FAvICONS -->
+    <link rel="shortcut icon" href="./icons/favicon-16x16.png" type="image/x-icon">
 
 
 
@@ -24,7 +36,7 @@
 <link rel="stylesheet" href="./style.css">
 
 
-<link rel="shortcut icon" href="./icons/favicon-16x16.png" type="image/x-icon">
+
   
 
  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
@@ -83,17 +95,21 @@
                   <p>Enter The Secret Code</p>
                   <input  class ="code"type="text" placeholder="Enter the Code" id="password">
                   <button type ="submit"class="adminBtn">Done</button>
+                 
                   
-               
+                 
                   <a href="/admin.html" class="admin">Go To Admin Page >> </a>
                
                 </div>
               </div>
             </div>
           </div>
-        
+
         <div class="wrapper">
+   
+
             <div class="search-input">
+               
                 
         <form autocomplete="off">
             
@@ -106,6 +122,7 @@
         </form>
         
         <div id="result"></div>
+        
     </div>
 </div>
 <br>
@@ -113,6 +130,7 @@
 
     
     </div>
+
 </body>
 
 </html>
@@ -130,6 +148,7 @@
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <!--geocoder-->
 
-
+<!-- Adding register service worker -->
+<script src="./RegisterServiceWorker.js"></script>
 <script src="./index.js"></script>
 

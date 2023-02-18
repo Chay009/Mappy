@@ -107,6 +107,7 @@ document.querySelector('.adminBtn').addEventListener('click',()=>{
   }
   else{
     alert('Wrong Code Try Again')
+    document.querySelector('#password').value ="";
   }
  
  
@@ -126,7 +127,7 @@ function showResults(val) {
   }
   let placeList = '';
               // During Development  BASE_URL=http://127.0.0.1:6969
-  fetch(`https://mapify-7kzf.onrender.com/suggest?q=${val}`).then(
+  fetch(`http://127.0.0.1:6969/suggest?q=${val}`).then(
    function (response) {
      return response.json();
    }).then(function (data) {
@@ -151,6 +152,52 @@ function showResults(val) {
       showResults()
      })
    
+
+
+      document.querySelector('.icon').className='random'
+  document.querySelector('#search').style.display='none'
+  document.querySelector('.cross').style.visibility='visible'
+  document.querySelector('#result').style.display='none'
+//   const iconElement = document.querySelector('#search'); // replace '.icon' with the selector for your specific icon element
+// iconElement.addEventListener('click', (event) => {
+//   iconElement.classList.add('disabled');
+// });
+   let point=document.querySelector('.search-suggest').value;
+   document.querySelector('.search-suggest').disabled=true;
+
+
+ // During Development  BASE_URL=http://127.0.0.1:6969
+  fetch(`http://127.0.0.1:6969/maproute/location?q=${point}`).then((response)=>{return response.json()}).then((data)=>{
+    placeInfo=data;
+    // console.log(placeInfo[0]);
+    // alert(placeInfo[0].place)
+
+
+
+
+    
+ // Create a new routing control instance
+let control = L.Routing.control({
+  waypoints: [
+    L.latLng(lat,long),
+  L.latLng(placeInfo[0].latitude,placeInfo[0].longitude)
+   
+  ]
+}).addTo(map_init);
+
+
+
+// updateRoute([
+
+//   // L.latLng(51.5, -0.1),
+//   // L.latLng(51.51, -0.1)
+  
+//  ]);
+   
+    })
+
+
+
         
 });
 
@@ -219,7 +266,7 @@ document.querySelector('.icon').addEventListener('click',()=>{
    let point=document.querySelector('.search-suggest').value;
 
  // During Development  BASE_URL=http://127.0.0.1:6969
-  fetch(`https://mapify-7kzf.onrender.com/maproute/location?q=${point}`).then((response)=>{return response.json()}).then((data)=>{
+  fetch(`http://127.0.0.1:6969/maproute/location?q=${point}`).then((response)=>{return response.json()}).then((data)=>{
     placeInfo=data;
     // console.log(placeInfo[0]);
     // alert(placeInfo[0].place)
@@ -229,13 +276,24 @@ document.querySelector('.icon').addEventListener('click',()=>{
 
     
  // Create a new routing control instance
-let control = L.Routing.control({
-  waypoints: [
-    L.latLng(lat,long),
+
+
+ var waypoints = [
+  L.latLng(lat,long),
   L.latLng(placeInfo[0].latitude,placeInfo[0].longitude)
-   
-  ]
+
+ 
+];
+let control = L.Routing.control({
+  waypoints: waypoints,
+
 }).addTo(map_init);
+
+
+
+
+
+
 
 
 
