@@ -13,6 +13,16 @@ if('serviceWorker' in navigator){
 
 
 
+// ####### For IOS
+document.querySelector('.prompt-div').style.display = 'none';
+//checking ig=f thedevice is ios
+const isIOS=/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
 
+//c hecking in pwa manifest
+const isPWAinstalled=window.matchMedia('(display-mode : standalone)').matches ;
 
+// showing the prompt
+if(isIOS && !isPWAinstalled)
+{document.querySelector('.prompt-div').style.display = 'block';
 
+}

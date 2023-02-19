@@ -250,7 +250,7 @@ let control = L.Routing.control({
 
   
 document.querySelector(".cross").addEventListener("click", function() {
-  location.reload(false);
+  location.reload();
 });
   
 
