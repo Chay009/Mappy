@@ -1,6 +1,6 @@
 {
     "name": "Mappy",
-    "short_name": "mappy",
+    "short_name": "Mappy",
     "start_url": "/",
     "display":"standalone",
     "background_color":"#FFE902",

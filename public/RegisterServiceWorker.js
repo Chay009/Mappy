@@ -17,7 +17,7 @@ if('serviceWorker' in navigator){
 
 
 
-var iodDiv=`
+var iosDiv=`
 
     
 <div class ="prompt-div" >
@@ -32,7 +32,7 @@ var iodDiv=`
         <h5>Press the 'Share' button on the menu bar  below</h5>
         <h5>Press  'Add' to Home Screen</h5>
 </div>`
-document.querySelector('.prompt-div').style.display = 'block';
+
 //checking ig=f thedevice is ios
 const isIOS=/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
 
@@ -40,7 +40,45 @@ const isIOS=/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
 const isPWAinstalled=window.matchMedia('(display-mode : standalone)').matches ;
 
 // showing the prompt
+
 if(isIOS && !isPWAinstalled)
-{document.querySelector('.prompt-div').style.display = 'block';
+{
+  document.querySelector('.prompt-div').style.display = 'block';
+
+  document.querySelector('.prompt-cancel').addEventListener('click',()=>{
+    document.querySelector('.prompt-div').style.display = 'none';
+  });
+
 
 }
+
+
+
+   
+        // // check if the PWA is not installed
+        // if (!navigator.standalone && !window.matchMedia('(display-mode: standalone)').matches) {
+        //     let visitCount = 0;
+            
+        //     document.querySelector('.prompt-div').style.display = 'block';
+        //     // listen for the 'fetch' event
+        //     self.addEventListener('fetch', event => {
+        //       // increment the visit count for every page visit
+        //       self.addEventListener('fetch', event => {
+        //         // check if the requested resource is not the current page
+        //         if (event.request.url !== self.location.href) {
+        //           visitCount++;
+        //         }
+                
+        //       });
+              
+              
+        //       // show the div when the user has visited the site about 4 times
+        //       if ( visitCount==0) {
+        //         event.respondWith(new Response(iosDiv, {
+        //           headers: {'Content-Type': 'text/html'}
+        //         }));
+        //       } else {
+        //         event.respondWith(fetch(event.request));
+        //       }
+        //     });
+        //   }

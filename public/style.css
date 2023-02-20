@@ -10,8 +10,7 @@ body {
 
 .prompt-div{
   position: fixed;
-
- display: none;
+display: block;
   margin-right: 40px;
   padding-top: 20px;
   padding-left: 20px;
