@@ -14,7 +14,25 @@ if('serviceWorker' in navigator){
 
 
 // ####### For IOS
-document.querySelector('.prompt-div').style.display = 'none';
+
+
+
+var iodDiv=`
+
+    
+<div class ="prompt-div" >
+    <div>
+     
+            <h3>Add to Home Screen </h3>
+            <a href="#" class="prompt-cancel">Cancel</a>
+              
+          
+    </div>
+        <div>This website has functionality. Add as App to Home Screen</div>
+        <h5>Press the 'Share' button on the menu bar  below</h5>
+        <h5>Press  'Add' to Home Screen</h5>
+</div>`
+document.querySelector('.prompt-div').style.display = 'block';
 //checking ig=f thedevice is ios
 const isIOS=/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
 
