@@ -215,6 +215,9 @@ function showResults(val) {
 //   const iconElement = document.querySelector('#search'); // replace '.icon' with the selector for your specific icon element
 // iconElement.addEventListener('click', (event) => {
 //   iconElement.classList.add('disabled');
+
+
+document.querySelector('#map').style.pointerEvents='none'
 // });
    let point=document.querySelector('.search-suggest').value;
    document.querySelector('.search-suggest').disabled=true;
@@ -301,8 +304,10 @@ let control = L.Routing.control({
 document.querySelector(".cross").addEventListener("click", function() {
   location.reload();
 });
+// const LayerList=document.querySelector('.leaflet-control-layers-selector')
+// LayerList.addEventListener("click", ()=> {
   
-
+// })
 
 let placeInfo;
 
