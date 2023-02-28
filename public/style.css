@@ -8,6 +8,15 @@ body {
 }
  
 
+
+
+
+#map > div.leaflet-control-container > div.leaflet-top.leaflet-right > div{
+  top: 450px;
+  right: -5px;
+ 
+}
+
 .prompt-div{
   position: fixed;
 display: block;

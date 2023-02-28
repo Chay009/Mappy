@@ -5,10 +5,8 @@ self.addEventListener('install',(event)=>{
     console.log('Service worker has been installed')
 }) 
 
-// listening to active event to activate unregister and then register by reloading page     
-self.addEventListener('activate',(event)=>{
-    console.log('Service worker has been activated')
-}) 
+  
+
 
  // whenver service worker changes it will not updated automatically to do so close tab and open but creates bad user experience so skipwaiting is needed
 
@@ -28,7 +26,24 @@ self.addEventListener('activate',(event)=>{
     );
   });
   
-  
+  // listening to active event to activate unregister and then register by reloading page   
+
+  self.addEventListener('activate', function(event) {
+    console.log('Service worker has been activated')
+    event.waitUntil(
+      caches.keys().then(function(cacheNames) {
+        return Promise.all(
+          cacheNames.map(function(cacheName) {
+            if (cacheName !== 'Mappy-cache-1') {
+              return caches.delete(cacheName);
+            }
+          })
+        );
+      })
+    );
+  });
+
+
   // this code shows add to home screen button in chrome
   self.addEventListener('fetch', (e) => {
     console.log(e.request.url);

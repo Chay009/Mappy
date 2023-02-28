@@ -17,12 +17,60 @@ L.control.zoom({
 }).addTo(map_init);
 
 
+
+
+
+
+
+//  open street map
 var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     //attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     attribution: 'Chaitanya' 
 }).addTo(map_init);
 
 
+// var CartoDB_DarkMatter = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+// // attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+
+// });
+// CartoDB_DarkMatter.addTo(map_init);
+
+
+ // Satelite Layer
+var googleSat = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',{
+  
+   subdomains:['mt0','mt1','mt2','mt3']
+ });
+googleSat.addTo(map_init);
+
+// var Stamen_Watercolor = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.{ext}', {
+//  attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+// subdomains: 'abcd',
+
+// ext: 'jpg'
+// });
+// Stamen_Watercolor.addTo(map_init);
+
+
+// Google Map Layer
+
+var googleStreets = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',{
+    
+    subdomains:['mt0','mt1','mt2','mt3']
+ });
+ googleStreets.addTo(map_init);
+
+
+
+var baseLayers = {
+ 
+  "Google Map":googleStreets,
+  // "Water Color":Stamen_Watercolor,
+  "Satellite":googleSat,
+  "OpenStreetMap": osm,
+};
+
+L.control.layers(baseLayers).addTo(map_init);
 
 
 if(!navigator.geolocation) {
@@ -30,7 +78,7 @@ if(!navigator.geolocation) {
 } else {
     setInterval(() => {
         navigator.geolocation.getCurrentPosition(getPosition)
-    }, 5000);
+    }, 10000);
 }
 
 
@@ -74,10 +122,10 @@ function getPosition(position) {
    circle = L.circle([lat, long], { radius: accuracy})
 
    var featureGroup = L.featureGroup([ marker]).addTo(map_init)
-map_init.flyTo([lat,long],16.5,{
-    animate : true,
-    duration : 0.5,
-})
+// map_init.flyTo([lat,long],16,{
+//     animate : true,
+//     duration : 1,
+// })
    
 
     // map_init.fitBounds(featureGroup.getBounds())
