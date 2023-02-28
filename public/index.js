@@ -217,7 +217,7 @@ function showResults(val) {
 //   iconElement.classList.add('disabled');
 
 
-document.querySelector('#map').style.pointerEvents='none'
+
 // });
    let point=document.querySelector('.search-suggest').value;
    document.querySelector('.search-suggest').disabled=true;
