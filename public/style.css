@@ -12,10 +12,11 @@ body {
 
 
 #map > div.leaflet-control-container > div.leaflet-top.leaflet-right > div{
-  top: 550px;
-  right: 2px;
+  top: 565px;
+ right: -5px;
  
 }
+
 
 .prompt-div{
   position: fixed;
@@ -223,10 +224,15 @@ visibility: hidden;
 
 .leaflet-routing-container{
   top: 60vh;
-  right: 20vw;
+  right: 200px;
   z-index: 999;
-  height : 300px;
+  height : 500px;
   
+}
+/* routing box */
+#map > div.leaflet-control-container > div.leaflet-top.leaflet-right > div.leaflet-routing-container.leaflet-bar.leaflet-routing-collapsible.leaflet-control{
+right: 75px;
+bottom: 50px;
 }
 
 
@@ -236,18 +242,20 @@ visibility: hidden;
   overflow-x: hidden;
   cursor: pointer;
   z-index: 999;
+  right: 300px;
   
 }
 
 .leaflet-routing-alt {
  
   width: 70vw;
-  
+ 
   border-bottom: 1px solid #ccc;
   height: 15vh;
   overflow-y: auto;
   z-index: 999;
   transition: all 0.2s ease;
+  right:200px;
   
 }
 
