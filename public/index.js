@@ -8,7 +8,7 @@ var map_init = L.map('map', {
     center: [23.814296468133172, 86.44118417874446],
    
  
-    zoom: 16,
+    zoom: 17,
     markerZoomAnimation :true,
 });
 map_init.zoomControl.remove();
@@ -87,9 +87,44 @@ if(!navigator.geolocation) {
 } else {
     setInterval(() => {
         navigator.geolocation.getCurrentPosition(getPosition)
-    }, 10000);
+    }, 2500);
 }
 
+
+
+
+
+
+
+
+
+
+const directions=(waypoints)=>{
+
+  const routingLayer = L.layerGroup();
+  L.Routing.control({
+   waypoints: waypoints,
+   routeWhileDragging: true,
+   draggableWaypoints: false
+ 
+ }).addTo(map_init);
+
+ 
+ // Get the markers from the routing control
+ const routingControl = L.Routing.control();
+ const markers = routingControl.getWaypoints();
+ 
+ // Set the draggable option to false for each marker
+ markers.forEach(marker => {
+   marker.options.draggable = false;
+ });
+
+
+
+
+ 
+ }
+ 
 
 
 
@@ -152,8 +187,13 @@ function getPosition(position) {
 
     // map_init.fitBounds(featureGroup.getBounds())
     
+if(lat && long)
 
+{
+  // document.querySelector('.wrapper').style.display='block'
+}
     console.log("Your coordinate is: Lat: " + lat + " Long: " + long + " Accuracy: " + accuracy)
+   
 
 
 
@@ -171,7 +211,7 @@ function getPosition(position) {
 // we uses from for sending data since we dont need to add headers etc if form everything is handled by js and html themselves
 document.querySelector('.adminBtn').addEventListener('click',()=>{
  
-  if (document.querySelector('#password').value ==="IamAdmin"){
+  if (document.querySelector('#password').value ==="456789"){
     
     document.querySelector('.admin').style.display = 'block';
     document.querySelector('#password').value ="";
@@ -256,14 +296,20 @@ function showResults(val) {
 
     
  // Create a new routing control instance
-let control = L.Routing.control({
-  waypoints: [
-    L.latLng(lat,long),
-  L.latLng(placeInfo[0].latitude,placeInfo[0].longitude)
-   
-  ]
-}).addTo(map_init);
 
+
+
+
+
+
+ var waypoints = [
+  L.latLng(lat,long),
+  L.latLng(placeInfo[0].latitude,placeInfo[0].longitude)
+
+ 
+];
+
+directions(waypoints)
 
 
 // updateRoute([
@@ -322,10 +368,9 @@ let control = L.Routing.control({
 // }
 
 
+
   
-document.querySelector(".cross").addEventListener("click", function() {
-  location.reload();
-});
+
 // const LayerList=document.querySelector('.leaflet-control-layers-selector')
 // LayerList.addEventListener("click", ()=> {
   
@@ -359,24 +404,23 @@ document.querySelector('.icon').addEventListener('click',()=>{
  // Create a new routing control instance
 
 
+
+
+
+
+
+
+
+
  var waypoints = [
   L.latLng(lat,long),
   L.latLng(placeInfo[0].latitude,placeInfo[0].longitude)
 
  
 ];
-let control = L.Routing.control({
-  waypoints: waypoints,
-
-}).addTo(map_init);
 
 
-
-
-
-
-
-
+directions(waypoints)
 
 // updateRoute([
 
@@ -393,4 +437,13 @@ let control = L.Routing.control({
  
 
 
+  });
+
+  document.querySelector(".cross").addEventListener("click", function() {
+    location.reload(false);
+ 
+  
+   
+   
+    
   });
