@@ -168,7 +168,7 @@ body{
 .search-input .icon{
   position: absolute;
   right: 0px;
-  top: 0px;
+  top: 2px;
   height: 5.5vh;
   width: 55px;
   text-align: center;
@@ -197,7 +197,7 @@ body{
   
 }
 .search-input .cross{
-visibility: hidden;
+display: none;
   position: absolute;
   border-radius: 50%;
   right: 60px;

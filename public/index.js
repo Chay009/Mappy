@@ -18,10 +18,6 @@ L.control.zoom({
 
 
 
-
-
-
-
 //  open street map
 var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     //attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -29,11 +25,6 @@ var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map_init);
 
 
-// var CartoDB_DarkMatter = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-// // attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-
-// });
-// CartoDB_DarkMatter.addTo(map_init);
 
 
 
@@ -56,13 +47,6 @@ var googleSat = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',
  });
 googleSat.addTo(map_init);
 
-// var Stamen_Watercolor = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.{ext}', {
-//  attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-// subdomains: 'abcd',
-
-// ext: 'jpg'
-// });
-// Stamen_Watercolor.addTo(map_init);
 
 
 
@@ -98,33 +82,110 @@ if(!navigator.geolocation) {
 
 
 
+var control;
+const addRoute=(waypoints,latitude,longitude)=>{
 
-const directions=(waypoints)=>{
 
-  const routingLayer = L.layerGroup();
-  L.Routing.control({
+  
+  control=L.Routing.control({
    waypoints: waypoints,
-   routeWhileDragging: true,
+   createMarker: function (i, wayp,n,) {
+    // use the custom icon for the start marker only
+    
+
+
+
+
+    var greenIcon = new L.Icon({
+      iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
+      shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.4/images/marker-shadow.png',
+      iconSize: [25, 41],
+      iconAnchor: [12, 41],
+      popupAnchor: [1, -34],
+      shadowSize: [41, 41]
+    });
+    var redIcon = new L.Icon({
+      iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+      shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.4/images/marker-shadow.png',
+      iconSize: [25, 41],
+      iconAnchor: [12, 41],
+      popupAnchor: [1, -34],
+      shadowSize: [41, 41]
+    });
+
+
+    
+    if (i === 0) {
+       // Update the marker with the user's location
+       setInterval(() => {
+        navigator.geolocation.watchPosition(function(position) {
+          console.log([position.coords.latitude, position.coords.longitude])
+          return L.marker([position.coords.latitude, position.coords.longitude], {
+            icon: greenIcon
+          });
+         
+        });
+    }, 4500);
+
+      
+
+   
+    }
+    if (i === 1) {
+      return L.marker([latitude,longitude], {
+        icon: redIcon
+      });
+    }
+  },
+   routeWhileDragging: false,
    draggableWaypoints: false
  
  }).addTo(map_init);
 
  
  // Get the markers from the routing control
- const routingControl = L.Routing.control();
- const markers = routingControl.getWaypoints();
+// if(control){
+//  const markers =  L.Routing.control().getWaypoints();
  
- // Set the draggable option to false for each marker
- markers.forEach(marker => {
-   marker.options.draggable = false;
- });
-
-
-
+//  // Set the draggable option to false for each marker
+//  markers.forEach(marker => {
+//    marker.options.draggable = false;
+//  });
 
  
- }
+//  }
+
+ document.querySelector(".cross").addEventListener("click", function() {
+  
+  
+        document.querySelector('.icon').style.display='inline-block';
+        document.querySelector('#search').style.display='inline-block';
+  if(control)
+  {
+    // console.log(control); // this is very useful to get directins routes info
+    control.remove();
+
+  }
+  document.querySelector('.cross').style.display='none';
  
+ 
+ 
+  document.querySelector('.search-suggest').disabled=false;
+ 
+  
+  document.querySelector('.search-suggest').value='';
+
+
+  
+ 
+ 
+
+
+ 
+ 
+  
+});
+}
 
 
 
@@ -157,11 +218,17 @@ var svg = `<svg width="60" height="60" viewBox="0 0 60 60">
 			popupAnchor : [0, -30],
 		});
 
+
+    function getRouteLocation(lati,longi){
+     return [lati,longi]
+    }
+
 function getPosition(position) {
     // console.log(position)
     lat = position.coords.latitude
     long = position.coords.longitude
     accuracy = position.coords.accuracy
+    getRouteLocation(lat,long)
 
     if (marker) {
         map_init.removeLayer(marker)
@@ -236,7 +303,9 @@ document.querySelector('.adminBtn').addEventListener('click',()=>{
 
 
 function showResults(val) {
+
   res = document.getElementById("result");
+  res.style.display ='block';
   res.innerHTML = '';
   if (val == '') {
     return;
@@ -256,7 +325,7 @@ function showResults(val) {
 
 
 
-  document.querySelector('.ulist').addEventListener("click", (e)=>{
+       document.querySelector('.ulist').addEventListener("click", (e)=>{
    // console.log(e.target.innerHTML);
   
 
@@ -264,76 +333,52 @@ function showResults(val) {
    
    searchBtn=document.querySelector('.search-suggest');
      searchBtn.value = e.target.innerText;
-     document.querySelector('.search-suggest').addEventListener("onkeyup", (e)=>{
-      showResults()
+     document.querySelector('.search-suggest').addEventListener("oninput", (e)=>{
+      // console.log(document.querySelector('.search-suggest').value)
+      console.log("document.querySelector('.search-suggest').value")
+            showResults()
      })
    
 
 
-      document.querySelector('.icon').className='random'
-  document.querySelector('#search').style.display='none'
-  document.querySelector('.cross').style.visibility='visible'
+      // document.querySelector('.icon').className='random'
+  // document.querySelector('#search').style.display='none'
+  document.querySelector('.cross').style.display='block'
+  
   document.querySelector('#result').style.display='none'
-//   const iconElement = document.querySelector('#search'); // replace '.icon' with the selector for your specific icon element
-// iconElement.addEventListener('click', (event) => {
-//   iconElement.classList.add('disabled');
 
 
 
-// });
+
    let point=document.querySelector('.search-suggest').value;
    document.querySelector('.search-suggest').disabled=true;
 
 
  // During Development  BASE_URL=http://127.0.0.1:6969
   fetch(`https://mapify-7kzf.onrender.com/maproute/location?q=${point}`).then((response)=>{return response.json()}).then((data)=>{
-    placeInfo=data;
-    // console.log(placeInfo[0]);
-    // alert(placeInfo[0].place)
-
-
-
-
+   
+  
     
- // Create a new routing control instance
+  
+  placeInfo=data;
+//   setInterval(() => {
+//     navigator.geolocation.getCurrentPosition(getPosition)
+// }, 2500);
 
-
-
-
-
-
- var waypoints = [
+var waypoints = [
   L.latLng(lat,long),
   L.latLng(placeInfo[0].latitude,placeInfo[0].longitude)
 
  
 ];
 
-directions(waypoints)
-
-
-// updateRoute([
-
-//   // L.latLng(51.5, -0.1),
-//   // L.latLng(51.51, -0.1)
-  
-//  ]);
-   
+addRoute(waypoints,placeInfo[0].latitude,placeInfo[0].longitude);
+       
     })
-
-
-
-        
+       
 });
 
-
-
-  
-  
-
-  
-
-
+    
 
      return true;
    }).catch(function (err) {
@@ -342,108 +387,49 @@ directions(waypoints)
    });
 }
 
-/*document.querySelector('.search-btn').addEventListener('click',(e)=>{
-    const inp=document.querySelector('#input').value;
-    console.log(inp)
-    
-    })*/
-  
 
-// // Function to update the route
-// function updateRoute(waypoints) {
- 
-
-//     // Remove the previous route
-//     if (control) {
-//       control.remove();
-//     }
-   
-//   // Add a new routing control instance with updated waypoints
-//   let control = L.Routing.control({
-//     waypoints: waypoints
-//   }).addTo(map_init);
-
- 
-
-// }
-
-
-
-  
-
-// const LayerList=document.querySelector('.leaflet-control-layers-selector')
-// LayerList.addEventListener("click", ()=> {
-  
-// })
 
 let placeInfo;
 
-document.querySelector('.icon').addEventListener('click',()=>{
+         document.querySelector('.icon').addEventListener('click',()=>{
 
 
-  document.querySelector('.icon').className='random'
+  document.querySelector('.icon').display='none'
   document.querySelector('#search').style.display='none'
-  document.querySelector('.cross').style.visibility='visible'
+
+
+  document.querySelector('.cross').style.display='block'
   document.querySelector('#result').style.display='none'
-//   const iconElement = document.querySelector('#search'); // replace '.icon' with the selector for your specific icon element
-// iconElement.addEventListener('click', (event) => {
-//   iconElement.classList.add('disabled');
-// });
+
    let point=document.querySelector('.search-suggest').value;
 
  // During Development  BASE_URL=http://127.0.0.1:6969
   fetch(`https://mapify-7kzf.onrender.com/maproute/location?q=${point}`).then((response)=>{return response.json()}).then((data)=>{
-    placeInfo=data;
+   
+  
+  
+  placeInfo=data;
     // console.log(placeInfo[0]);
-    // alert(placeInfo[0].place)
-
-
-
-
-    
- // Create a new routing control instance
-
-
-
-
-
-
-
-
+  
+                   
 
 
  var waypoints = [
   L.latLng(lat,long),
-  L.latLng(placeInfo[0].latitude,placeInfo[0].longitude)
-
- 
-];
+  L.latLng(placeInfo[0].latitude,placeInfo[0].longitude)];
 
 
-directions(waypoints)
+addRoute(waypoints,placeInfo[0].latitude,placeInfo[0].longitude)
 
-// updateRoute([
 
-//   // L.latLng(51.5, -0.1),
-//   // L.latLng(51.51, -0.1)
-  
-//  ]);
    
     })
 
 
-//     //Call the function with updated waypoints
+
 
  
 
 
   });
 
-  document.querySelector(".cross").addEventListener("click", function() {
-    location.reload(false);
- 
-  
-   
-   
-    
-  });
