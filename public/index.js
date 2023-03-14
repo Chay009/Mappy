@@ -127,7 +127,7 @@ const addRoute=(waypoints,latitude,longitude)=>{
         
       });
     }
- var trackMarker;
+
     
     if (i === 0) {
        // Update the marker with the user's location
@@ -189,12 +189,7 @@ const addRoute=(waypoints,latitude,longitude)=>{
   
         document.querySelector('.icon').style.display='inline-block';
         document.querySelector('#search').style.display='inline-block';
-  if(control)
-  {
-    // console.log(control); // this is very useful to get directins routes info
-    control.remove();
-
-  }
+  
   document.querySelector('.cross').style.display='none';
  
  
@@ -205,7 +200,13 @@ const addRoute=(waypoints,latitude,longitude)=>{
   document.querySelector('.search-suggest').value='';
 
 
-  
+  if(control)
+  {
+    // console.log(control); // this is very useful to get directins routes info
+    control.remove();
+    window.location.reload(false)
+
+  }
  
  
 
@@ -359,7 +360,7 @@ function showResults(val) {
 
 
 
-
+///////// MAIN CODE /////////////
        document.querySelector('.ulist').addEventListener("click", (e)=>{
    // console.log(e.target.innerHTML);
   
