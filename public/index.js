@@ -83,8 +83,17 @@ if(!navigator.geolocation) {
 
 
 var control;
-const addRoute=(waypoints,latitude,longitude)=>{
 
+var newLat;
+var newlong;
+
+const addRoute=(waypoints,latitude,longitude)=>{
+  if(control)
+  {
+    // console.log(control); // this is very useful to get directins routes info
+    control.remove();
+
+  }
 
   
   control=L.Routing.control({
@@ -92,8 +101,6 @@ const addRoute=(waypoints,latitude,longitude)=>{
    createMarker: function (i, wayp,n,) {
     // use the custom icon for the start marker only
     
-
-
 
 
     var greenIcon = new L.Icon({
@@ -114,28 +121,50 @@ const addRoute=(waypoints,latitude,longitude)=>{
     });
 
 
+    if (i === 1) {
+      return L.marker([latitude,longitude], {
+        icon: redIcon,
+        
+      });
+    }
+ var trackMarker;
     
     if (i === 0) {
        // Update the marker with the user's location
        setInterval(() => {
         navigator.geolocation.watchPosition(function(position) {
           console.log([position.coords.latitude, position.coords.longitude])
+          newLat=position.coords.latitude;
+          newlong=position.coords.longitude;
+          var wPoints = [
+            L.latLng(position.coords.latitude, position.coords.longitude),
+            L.latLng(placeInfo[0].latitude,placeInfo[0].longitude)];
+            
+       
+// console.log(wPoints)
+           
+
+            
+            // not working
           return L.marker([position.coords.latitude, position.coords.longitude], {
-            icon: greenIcon
+            icon: redIcon
           });
-         
+     
+     
+
+
         });
-    }, 4500);
+     
+
+        addRoute(waypoints,latitude,longitude);
+      
+    }, 20000);
 
       
 
    
     }
-    if (i === 1) {
-      return L.marker([latitude,longitude], {
-        icon: redIcon
-      });
-    }
+  
   },
    routeWhileDragging: false,
    draggableWaypoints: false
@@ -208,27 +237,32 @@ var svg = `<svg width="60" height="60" viewBox="0 0 60 60">
 `
 
 
-	var meIcon = L.divIcon({
-		className: "leaflet-data-marker",
-			html: svg.replace('#','%25'),
+	// var meIcon = L.divIcon({
+	// 	className: "leaflet-data-marker",
+	// 		html: svg.replace('#','%25'),
 
       
-			iconAnchor  : [9, 12],
-			iconSize    : [36, 42],
-			popupAnchor : [0, -30],
-		});
+	// 		iconAnchor  : [9, 12],
+	// 		iconSize    : [36, 42],
+	// 		popupAnchor : [0, -30],
+	// 	});
 
 
-    function getRouteLocation(lati,longi){
-     return [lati,longi]
-    }
+    var greenIcon = new L.Icon({
+      iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
+      shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.4/images/marker-shadow.png',
+      iconSize: [25, 41],
+      iconAnchor: [12, 41],
+      popupAnchor: [1, -34],
+      shadowSize: [41, 41]
+    });
 
 function getPosition(position) {
     // console.log(position)
     lat = position.coords.latitude
     long = position.coords.longitude
     accuracy = position.coords.accuracy
-    getRouteLocation(lat,long)
+ 
 
     if (marker) {
         map_init.removeLayer(marker)
@@ -238,8 +272,9 @@ function getPosition(position) {
         map_init.removeLayer(circle)
     }
 
+    // create a button onclick show current location with flyto 
     marker = L.marker([lat, long],{
-      icon: meIcon,
+      icon: greenIcon,
 			title: '@me'
     })
    
