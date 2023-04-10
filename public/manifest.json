@@ -3,8 +3,8 @@
     "short_name": "Mappy",
     "start_url": "/",
     "display":"standalone",
-    "background_coloooor":"#FFE902",
-    "theme_colooooor":"#FFE1C4",
+    "background_color":"#19092e",
+    "theme_color":"#FFE1C4",
     "comment" : "to remove splash screen background_color and theme_color has to commented we cant comment so add extra oo",
     "orientation":"potrait-primary",
     "icons":[

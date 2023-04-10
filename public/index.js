@@ -7,10 +7,15 @@
 document.addEventListener('DOMContentLoaded', function(){
   
   setTimeout(() => {
+
+    
     loader.style.display= 'none';
-    mappy.style.display= 'block';
+
+    mappy.className='appear'
     
   }, 5000);
+
+ 
  
 });
 
