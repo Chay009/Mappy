@@ -1,5 +1,18 @@
  //for local running in terminal type ipconfig and use that ip idress in mobile  make sure both server and mobile are connectedto same hostnameg
+  const loader=document.querySelector('.loader main');
+  const mappy=document.querySelector('.mappy');
+
+
+    
+document.addEventListener('DOMContentLoaded', function(){
   
+  setTimeout(() => {
+    loader.style.display= 'none';
+    mappy.style.display= 'block';
+    
+  }, 5000);
+ 
+});
 
 
 

@@ -2,6 +2,7 @@
 // ehenver this file is changed from server etc this runs again 
 
 self.addEventListener('install',(event)=>{
+  self.skipWaiting()
     console.log('Service worker has been installed')
 }) 
 

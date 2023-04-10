@@ -22,7 +22,7 @@ app.use(express.json());     // built in middleware
 
 
 
-// main page
+// main page 
 
 console.log(path.join(__dirname, 'public'));
 
