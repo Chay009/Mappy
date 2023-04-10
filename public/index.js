@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
     mappy.className='appear'
     
-  }, 5000);
+  }, 3000);
 
  
  
