@@ -1,10 +1,7 @@
 // If serviceWorker.js is installed then this fn will handled  and it will run 0nly once ie before intallling once installed nothing happens 
 // ehenver this file is changed from server etc this runs again 
 
-self.addEventListener('install',(event)=>{
-  self.skipWaiting()
-    console.log('Service worker has been installed')
-}) 
+let CACHE_NAME = 'Mappy Web-app-v1';
 
   
 
@@ -16,7 +13,7 @@ self.addEventListener('install',(event)=>{
 
  self.addEventListener('install', (e) => {
     e.waitUntil(
-      caches.open('Mappy-cache-1').then((cache) => cache.addAll([
+      caches.open(CACHE_NAME).then((cache) => cache.addAll([
         '/',
         '/index.html',
         '/index.js',
@@ -35,7 +32,7 @@ self.addEventListener('install',(event)=>{
       caches.keys().then(function(cacheNames) {
         return Promise.all(
           cacheNames.map(function(cacheName) {
-            if (cacheName !== 'Mappy-cache-1') {
+            if (cacheName !== CACHE_NAME) {
               return caches.delete(cacheName);
             }
           })
@@ -53,3 +50,9 @@ self.addEventListener('install',(event)=>{
     );
   });
   
+
+  // 4 - Message
+// Here we wait for a MessageEvent to fire, if the message contains skipWaiting we should execute that method.
+self.addEventListener('message', event => {
+  if (event.data === 'skipWaiting') return skipWaiting();
+});

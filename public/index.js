@@ -1,23 +1,187 @@
- //for local running in terminal type ipconfig and use that ip idress in mobile  make sure both server and mobile are connectedto same hostnameg
-  const loader=document.querySelector('.loader main');
-  const mappy=document.querySelector('.mappy');
+//custom func to scroll to top according to our needs
+
+let tour=introJs();
+const smoothscrolltoTop=()=>{
+  let currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
+  if (currentScroll > 0) {
+       window.requestAnimationFrame(smoothscrolltoTop);
+       window.scrollTo (0,currentScroll - (currentScroll/10));  // zero is for top 
+  }
+}
 
 
-    
-document.addEventListener('DOMContentLoaded', function(){
+const Guide=()=>{
+ 
+
+  if(window.localStorage.getItem('already-shown') /* ||  response from server */  )
+      {
+          return;
+      }
+
+
+
+
+
+const refreshTourSteps=()=>{
   
-  setTimeout(() => {
+  tour.setOption('features',features.filter((feature)=>{
+      if(!feature.hasOwnProperty('element'))
+      {
+          return true;
+      }
 
-    
-    loader.style.display= 'none';
+      return feature.element || !!feature.element.getClientRects().length; 
+      
+  })
 
-    mappy.className='appear'
+  )
+}
+
+
+     
+
+
+
+  let features=[
+      {
+          title : "welcome to Mappy",
+          intro: "This webapp helps you search custom places inside IIT(Dhanbad) with directions and Routes",
+          
+          // position :'right',  // i can fix the positon of tooltip for responsiveness for individual element
+              },
+
+
+              {
+                  title : "Search Bar",
+                  intro: " This helps you to search places of your choice",
+                  element:document.querySelector(".search-input")
+                  // position :'right',  // i can fix the positon of tooltip for responsiveness for individual element
+                      },
     
-  }, 3000);
+      
+
+      {
+          title:"UI Layers ",
+          intro :" If you feel this UI is not for you,   toggle anytime for different Map Layers views! ",
+          element : document.querySelector('.leaflet-control-layers-toggle')
+  
+      },
+      {
+        title : "Admin",
+        intro: "If you have Admin-Key,Enter the code and start adding new places",
+        element:document.querySelector(".btn")
+        // position :'right',  // i can fix the positon of tooltip for responsiveness for individual element
+            },
+      {
+          title :`Developer`,
+          intro:"You'll Never miss an update with updating system -Made with ❣ by Chaitanya",
+          element : document.querySelector('.leaflet-control-attribution'),
+          
+  
+      },
+      
+  ]
+
+
+
+
+
+
+
+
+  tour.setOptions({
+      // steps : []
+  
+     
+      steps: features.filter((feature)=>{
+          if(!feature.hasOwnProperty('element'))
+          {
+              return true;
+          }
+  
+          return feature.element || !!feature.element?.getClientRects().length;
+      }),
+  
+      scrollToElement: true, // Enable smooth scrolling to elements
+    showProgress: true, // Show progress bar
+    showBullets: false, // Hide bullets
+    showButtons: true, // Show navigation buttons
+    exitOnOverlayClick: true, // Allow exiting the tour on overlay click
+    exitOnEsc: true, // Allow exiting the tour with the Esc key
+    autoPosition :true,
+    disableInteraction: true,
+    exitOnEsc : false, // for desktop to prevent tour on click esc
+    exitOnOverlayClick : false, // for mobile to prevent tour touching on gray area
+    showStepNumbers :false,
+    skipLabel :"SKIP",
+    doneLabel :"Finish!",
+    nextLabel :"Proceed",
+    prevLabel :"Prev",
+  
+  
+  }) 
+
+
+// this adds smooth scrolling to elements once step change 
+  tour.onafterchange(function(targetElement) {
+      targetElement.scrollIntoView({ behavior: 'smooth' });
+    });
+  
+
+
+
+tour.onexit (()=>{
+ 
+  window.removeEventListener('resize',refreshTourSteps)
+  window.localStorage.setItem('already-shown' ,true)  
 
  
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  
+
+})
+  tour.start()
+
+  window.addEventListener('resize',refreshTourSteps)
+  tour.refresh(true); // the will be use of it when some elements are hidden
+  
  
-});
+
+
+}
+window.addEventListener('DOMContentLoaded',()=>{
+  Guide()
+})
+
+
+ ////// tour done///////////
+ 
+ 
+ 
+
+
+
+
+
+
+// admin
+
+let admin=document.querySelector('.btn')?.addEventListener('click',()=>{
+
+  let key=prompt('Enter the security code','AuthKey🔑')
+  if(key==456789)
+  {
+    location.href='/admin.html';
+  }
+})
+
+
+
+
+ 
+ //for local running in terminal type ipconfig and use that ip idress in mobile  make sure both server and mobile are connectedto same hostnameg
+
+
 
 
 
@@ -28,6 +192,7 @@ var map_init = L.map('map', {
  
     zoom: 17,
     markerZoomAnimation :true,
+   
 });
 map_init.zoomControl.remove();
 L.control.zoom({
@@ -37,7 +202,7 @@ L.control.zoom({
 
 
 //  open street map
-var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+let osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     //attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     attribution: 'Chaitanya' 
 }).addTo(map_init);
@@ -49,7 +214,7 @@ var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 // Google Map Layer
 
-var googleStreets = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',{
+let googleStreets = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',{
     
     subdomains:['mt0','mt1','mt2','mt3'],
     attribution: 'Chaitanya' 
@@ -58,7 +223,7 @@ var googleStreets = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={
 
 
  // Satelite Layer
-var googleSat = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',{
+let googleSat = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',{
   
    subdomains:['mt0','mt1','mt2','mt3'],
    attribution: 'Chaitanya' 
@@ -75,9 +240,12 @@ var baseLayers = {
  
   // these layers should be opposite ie bottom layer is shown first
   // "Water Color":Stamen_Watercolor,
-   "OpenStreetMap": osm,
+
+  "OpenStreetMap": osm,
   "Satellite":googleSat,
   "Google Map":googleStreets,
+ 
+ 
  
 };
 
@@ -100,19 +268,44 @@ if(!navigator.geolocation) {
 
 
 
-var control;
+let control;
 
-var newLat;
-var newlong;
+let newLat;
+let newlong;
+
+
+// updating route is not working
 
 const addRoute=(waypoints,latitude,longitude)=>{
+  // latitude amd longitudeis place  location values 
+  let greenIcon,redIcon;
   if(control)
   {
     // console.log(control); // this is very useful to get directins routes info
     control.remove();
 
   }
+  if(greenIcon)
+  {
+    greenIcon=null;
+  }
 
+   greenIcon = new L.Icon({
+    iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.4/images/marker-shadow.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41]
+  });
+   redIcon = new L.Icon({
+    iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.4/images/marker-shadow.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41]
+  });
   
   control=L.Routing.control({
    waypoints: waypoints,
@@ -121,65 +314,48 @@ const addRoute=(waypoints,latitude,longitude)=>{
     
 
 
-    var greenIcon = new L.Icon({
-      iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
-      shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.4/images/marker-shadow.png',
-      iconSize: [25, 41],
-      iconAnchor: [12, 41],
-      popupAnchor: [1, -34],
-      shadowSize: [41, 41]
-    });
-    var redIcon = new L.Icon({
-      iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
-      shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.4/images/marker-shadow.png',
-      iconSize: [25, 41],
-      iconAnchor: [12, 41],
-      popupAnchor: [1, -34],
-      shadowSize: [41, 41]
-    });
+
 
 
     if (i === 1) {
+
+      
       return L.marker([latitude,longitude], {
         icon: redIcon,
         
       });
     }
 
+   let newWaypoints; 
     
     if (i === 0) {
+
        // Update the marker with the user's location
        setInterval(() => {
         navigator.geolocation.watchPosition(function(position) {
           console.log([position.coords.latitude, position.coords.longitude])
           newLat=position.coords.latitude;
           newlong=position.coords.longitude;
-          var wPoints = [
+          newWaypoints= [
             L.latLng(position.coords.latitude, position.coords.longitude),
-            L.latLng(placeInfo[0].latitude,placeInfo[0].longitude)];
-            
-       
-// console.log(wPoints)
-           
-
-            
-            // not working
-          return L.marker([position.coords.latitude, position.coords.longitude], {
-            icon: redIcon
-          });
-     
-     
-
+            L.latLng(placeInfo[0].latitude,placeInfo[0].longitude)];     
 
         });
      
 
-        addRoute(waypoints,latitude,longitude);
-      
-    }, 20000);
+        addRoute(newWaypoints,latitude,longitude);
+
+
 
       
+    }, 25000);
 
+// this executes first and then after 20 sec updates
+// from get position
+     return L.marker([lat,long], {
+      icon: greenIcon,
+      
+    });
    
     }
   
@@ -202,7 +378,7 @@ const addRoute=(waypoints,latitude,longitude)=>{
  
 //  }
 
- document.querySelector(".cross").addEventListener("click", function() {
+ document.querySelector(".cross").addEventListener("click", ()=> {
   
   
         document.querySelector('.icon').style.display='inline-block';
@@ -233,6 +409,8 @@ const addRoute=(waypoints,latitude,longitude)=>{
  
   
 });
+
+
 }
 
 
@@ -241,30 +419,9 @@ const addRoute=(waypoints,latitude,longitude)=>{
 
 
 
+
 var marker, circle, lat, long, accuracy;
-// var svg = '<svg id="mePin" xmlns="http://www.w3.org/2000/svg" width="43.3" height="42.4" viewBox="0 0 43.3 42.4"><path class="ring_outer" fill="#878787" d="M28.6 23c6.1 1.4 10.4 4.4 10.4 8 0 4.7-7.7 8.6-17.3 8.6-9.6 0-17.4-3.9-17.4-8.6 0-3.5 4.2-6.5 10.3-7.9.7-.1-.4-1.5-1.3-1.3C5.5 23.4 0 27.2 0 31.7c0 6 9.7 10.7 21.7 10.7s21.6-4.8 21.6-10.7c0-4.6-5.7-8.4-13.7-10-.8-.2-1.8 1.2-1 1.4z"/><path class="ring_inner" fill="#5F5F5F" d="M27 25.8c2 .7 3.3 1.8 3.3 3 0 2.2-3.7 3.9-8.3 3.9-4.6 0-8.3-1.7-8.3-3.8 0-1 .8-1.9 2.2-2.6.6-.3-.3-2-1-1.6-2.8 1-4.6 2.7-4.6 4.6 0 3.2 5.1 5.7 11.4 5.7 6.2 0 11.3-2.5 11.3-5.7 0-2-2.1-3.9-5.4-5-.7-.1-1.2 1.3-.7 1.5z"/><path class="mePin" d="M21.6 8.1a4 4 0 0 0 4-4 4 4 0 0 0-4-4.1 4.1 4.1 0 0 0-4.1 4 4 4 0 0 0 4 4.1zm4.9 8v-3.7c0-1.2-.6-2.2-1.7-2.6-1-.4-1.9-.6-2.8-.6h-.9c-1 0-2 .2-2.8.6-1.2.4-1.8 1.4-1.8 2.6V16c0 .9 0 2 .2 2.8.2.8.8 1.5 1 2.3l.2.3.4 1 .1.8.2.7.6 3.6c-.6.3-.9.7-.9 1.2 0 .9 1.4 1.7 3.2 1.7 1.8 0 3.2-.8 3.2-1.7 0-.5-.3-.9-.8-1.2l.6-3.6.1-.7.2-.8.3-1 .1-.3c.3-.8 1-1.5 1.1-2.3.2-.8.2-2 .2-2.8z" fill="#282828"/></svg>';
-var svg = `<svg width="60" height="60" viewBox="0 0 60 60">
-<circle cx="30" cy="30" r="7" fill="#FFA631" />
-<circle cx="30" cy="30" r="7" fill="#22A7F0" opacity="0.8">
-  <animate attributeName="r" from="7.5" to="20" dur="1.5s" repeatCount="indefinite" />
-  <animate attributeName="opacity" from="0.8" to="0" dur="1.5s" repeatCount="indefinite" />
-</circle>
-</svg>
 
-
-
-`
-
-
-	// var meIcon = L.divIcon({
-	// 	className: "leaflet-data-marker",
-	// 		html: svg.replace('#','%25'),
-
-      
-	// 		iconAnchor  : [9, 12],
-	// 		iconSize    : [36, 42],
-	// 		popupAnchor : [0, -30],
-	// 	});
 
 
     var greenIcon = new L.Icon({
@@ -275,29 +432,28 @@ var svg = `<svg width="60" height="60" viewBox="0 0 60 60">
       popupAnchor: [1, -34],
       shadowSize: [41, 41]
     });
+  
 
 function getPosition(position) {
     // console.log(position)
     lat = position.coords.latitude
     long = position.coords.longitude
     accuracy = position.coords.accuracy
+    marker
  
 
     if (marker) {
         map_init.removeLayer(marker)
     }
 
-    if (circle) {
-        map_init.removeLayer(circle)
-    }
-
+   
     // create a button onclick show current location with flyto 
-    marker = L.marker([lat, long],{
+   marker = L.marker([lat, long],{
       icon: greenIcon,
 			title: '@me'
     })
    
-   circle = L.circle([lat, long], { radius: accuracy})
+
 
    var featureGroup = L.featureGroup([ marker]).addTo(map_init)
 // map_init.flyTo([lat,long],16,{
@@ -329,36 +485,23 @@ if(lat && long)
 
 
 
-// we uses from for sending data since we dont need to add headers etc if form everything is handled by js and html themselves
-document.querySelector('.adminBtn').addEventListener('click',()=>{
- 
-  if (document.querySelector('#password').value ==="456789"){
-    
-    document.querySelector('.admin').style.display = 'block';
-    document.querySelector('#password').value ="";
-  
 
 
- 
 
-  }
-  else{
-    alert('Wrong Code Try Again')
-    document.querySelector('#password').value ="";
-  }
- 
- 
+
+
+let input=document.querySelector('#q');
+
+input?.addEventListener('input',()=>{
+  console.log("Your coordinate is:")
+showResults(input.value);
+
 })
 
 
+const showResults=(val)=> {
 
-
-
-
-
-function showResults(val) {
-
-  res = document.getElementById("result");
+  let res = document.getElementById("result");
   res.style.display ='block';
   res.innerHTML = '';
   if (val == '') {
@@ -366,15 +509,20 @@ function showResults(val) {
   }
   let placeList = '';
               // During Development  BASE_URL=http://127.0.0.1:6969
-  fetch(`https://mapify-7kzf.onrender.com/suggest?q=${val}`).then(
+  fetch(`https://mappy-devstudio.onrender.com/suggest?q=${val}`).then(
    function (response) {
      return response.json();
    }).then(function (data) {
-     for (i=0; i<data.length; i++) {
+     for (let i=0; i<data.length; i++) {
        placeList += ' <ul class="innerulist">' + data[i] + '</ul>';
        
      }
      res.innerHTML = ' <ul class="ulist" >' + placeList + '</ul> ';
+
+     if(input.val=='')
+     {
+      res.innerHTML ='';
+     }
 
 
 
@@ -385,9 +533,10 @@ function showResults(val) {
 
    
    
-   searchBtn=document.querySelector('.search-suggest');
+   let searchBtn=document.querySelector('.search-suggest');
      searchBtn.value = e.target.innerText;
      document.querySelector('.search-suggest').addEventListener("oninput", (e)=>{
+      
       // console.log(document.querySelector('.search-suggest').value)
       console.log("document.querySelector('.search-suggest').value")
             showResults()
@@ -409,7 +558,7 @@ function showResults(val) {
 
 
  // During Development  BASE_URL=http://127.0.0.1:6969
-  fetch(`https://mapify-7kzf.onrender.com/maproute/location?q=${point}`).then((response)=>{return response.json()}).then((data)=>{
+  fetch(`https://mappy-devstudio.onrender.com/maproute/location?q=${point}`).then((response)=>{return response.json()}).then((data)=>{
    
   
     
@@ -458,7 +607,7 @@ let placeInfo;
    let point=document.querySelector('.search-suggest').value;
 
  // During Development  BASE_URL=http://127.0.0.1:6969
-  fetch(`https://mapify-7kzf.onrender.com/maproute/location?q=${point}`).then((response)=>{return response.json()}).then((data)=>{
+  fetch(`https://mappy-devstudio.onrender.com/maproute/location?q=${point}`).then((response)=>{return response.json()}).then((data)=>{
    
   
   

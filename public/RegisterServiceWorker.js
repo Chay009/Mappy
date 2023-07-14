@@ -3,15 +3,64 @@
 
 
 // This file has to added every html file
-if('serviceWorker' in navigator){
 
-    // registering our service worker file name and making both the service worker file openly available to that folder
+// registr service worker -navigator-can use dom
+// service worker-self. -no dom window access
+
+
+if ('serviceWorker' in navigator) {
+
+    // The UI that will be presented when an update is found
+    var presentUpdateAvailable = serviceWorker => {
+        document.getElementById('update-banner').dataset.state = 'updateavailable';
+        document.querySelector('#update-banner .headline').innerHTML = 'Update available';
+        document.querySelector('#update-banner .subhead').innerHTML = 'Click here to update the app to the latest version';
+        document.getElementById('update-banner').addEventListener('click', clickEvent => {
+            serviceWorker.postMessage('skipWaiting');
+        });
+    }
+
+    // Register our service worker  // registering our service worker file name and making both the service worker file openly available to that folder
     navigator.serviceWorker.register('./serviceWorker.js')
-    .then((reg)=>{console.log('service Worker register',reg)})
-    .catch((err)=>{console.log('service Worker not register',err)})
+    .then(registration => {
+
+        // Present the update available UI if there is already an update waiting
+        if (registration.waiting) presentUpdateAvailable(registration.waiting);
+
+        // We wait for an UpdateFoundEvent, which is fired anytime a new service worker is acquired
+        registration.onupdatefound = updatefoundevent => {
+
+            // Ignore the event if this is our first service worker and thus not an update
+            if (!registration.active) return;
+
+            // Listen for any state changes on the new service worker
+            registration.installing.addEventListener('statechange', statechangeevent => {
+
+                // Wait for the service worker to enter the installed state (aka waiting)
+                if (statechangeevent.target.state !== 'installed') return;
+
+                // Present the update available UI
+                presentUpdateAvailable(registration.waiting);
+            });
+        };
+
+        // We wait for a ControllerEvent, which is fired when the document acquires a new service worker
+        navigator.serviceWorker.addEventListener('controllerchange', controllerchangeevent => {
+
+            // We delay our code until the new service worker is activated
+            controllerchangeevent.target.ready.then(registration => {
+
+                // Reload the window
+                if (!window.isReloading) {
+                    window.isReloading = true;
+                    window.location.reload();
+                }
+                
+            });
+        });
+    });
+   
 }
-
-
 
 // ####### For IOS
 

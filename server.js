@@ -69,6 +69,7 @@ const searchRouteHandler=require('./routes/search.route');
 const placeRouteHandler=require('./routes/place.route');
 const maplocationRouteHandler=require('./routes/maplocation.route');
 const getAllLocationsRouteHandler=require('./routes/getAll.route');
+const adminRouteHandler=require('./routes/admin.route');
 
 
 
@@ -102,6 +103,7 @@ app.use('/places',placeRouteHandler);  // only post route present
 
 app.use('/maproute/location',maplocationRouteHandler)  // only get route present
 app.use('/locations/all',getAllLocationsRouteHandler)  // only get route present
+app.use('/admin',adminRouteHandler); // admin/delete and admin/edit routes present
 
 
 
