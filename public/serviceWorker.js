@@ -1,7 +1,7 @@
 // If serviceWorker.js is installed then this fn will handled  and it will run 0nly once ie before intallling once installed nothing happens 
 // ehenver this file is changed from server etc this runs again 
 
-let CACHE_NAME = 'Mappy Web-App-v1';
+let CACHE_NAME = 'Mappy WebApp-v1';
 
   
 
