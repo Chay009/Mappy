@@ -16,61 +16,84 @@ find Live App: https://mappy-devstudio.onrender.com/
 
 <p align="center"><img src="https://socialify.git.ci/Chay009/mappy/image?description=1&amp;descriptionEditable=Mappy-%20Discover%2C%20Navigate%2C%20and%20Explore%3A%20Your%20Personal%20Guide%20to%20New%20Places!%0A&amp;font=Jost&amp;forks=1&amp;issues=1&amp;language=1&amp;name=1&amp;owner=1&amp;pattern=Circuit%20Board&amp;pulls=1&amp;stargazers=1&amp;theme=Dark" alt="project-image"></p>
 
+<hr>
+<hr>
+
+
 
 
 # `USER GUIDE`
 
- `User`  Features and Interfaces
+<h1 align="center"> User  Features and Interfaces</h1>
 
+
+ * Responsive and mobile-friendly UI feels native in both *IOS* and *Andriod*
 
 <img align="center" src="https://github.com/Chay009/mappy/blob/main/Images/andriod%20view.png?raw=true" height ="400"/>    <img align="left" src="https://github.com/Chay009/mappy/blob/main/Images/ios%20view.png?raw=true" height ="400"/> 
 
+<br>
 
- 
-
-1.User-friendly  intro guide to walk you through the app
+* User-friendly intro guide to walk you through the app makes seamless User Experience 
 
 
 <img align="center" src="https://github.com/Chay009/mappy/blob/main/Images/intro%20guide.png?raw=true" alt="intro" height ="400"/>
 
 
+<br>
 
-
-2. Dynamic search box gives the custom saved places by user/admin
+* Dynamic search box gives the custom saved places by user/admin with routes and directions
 
 
 <img align="center" src="https://github.com/Chay009/mappy/blob/main/Images/dynamic%20search.png?raw=true" height ="400"/>
+<img align="center" src="https://github.com/Chay009/mappy/blob/main/Images/directions.png?raw=true" height ="400"/>
 
+<br>
 
-3. Ever Felt the UI too boring you can toogle between the layers
+* Ever Felt the UI too boring you can toogle between layers anytime
 
 <img align="center" src="https://github.com/Chay009/mappy/blob/main/Images/street%20map%20view.png?raw=true" height ="400"/>     <img align="left" src="https://github.com/Chay009/mappy/blob/main/Images/google%20map%20view.png?raw=true" height ="400"/> 
 
+Additional Features
 
-4. Can navigate to admin dashboard with Admin-key
+ -->Can navigate to admin dashboard with Admin-key
 
-5. wanted to Access even offline- No worries in app caching does it for you
+ -->wanted to Access even offline- No worries in app caching does it for you
 
- `Admin`  Features and Interfaces
+
+<hr>
+<hr>
+
+
+
+ <h1 align="center"> Admin Features and Interfaces </h1>
+ 
+* Simple Managable Admin Dashbaord
+
+  Get Info of places added by simply hovering on markers
+ 
 
   <img src="https://github.com/Chay009/mappy/blob/main/Images/Admin%20page.png?raw=true" height ="400"/>
+<br>
 
-1. Get Info of places added by simply hovering on markers
- 
+  
 
 
 
 3. complete control over places ,can- `create` `edit` `delete` 
 
-**CREATE** <img src="https://github.com/Chay009/mappy/blob/main/Images/Add%20places.png?raw=true"  alt="g"  height="400" > **UPDATE** <img src="https://github.com/Chay009/mappy/blob/main/Images/Update%20Places.png?raw=true" height ="400"/><img src="https://github.com/Chay009/mappy/blob/main/Images/Edit%20places.png?raw=true" height ="400"/>  **DELETE**<img src="https://github.com/Chay009/mappy/blob/main/Images/Delete%20places.png?raw=true" height ="400"/> 
+**CREATE**<img  src="https://github.com/Chay009/mappy/blob/main/Images/Add%20places.png?raw=true"  alt="g"  height="400" > **UPDATE** <img  src="https://github.com/Chay009/mappy/blob/main/Images/Update%20Places.png?raw=true" height ="400"/><img src="https://github.com/Chay009/mappy/blob/main/Images/Edit%20places.png?raw=true" height ="400"/> **DELETE**<img src="https://github.com/Chay009/mappy/blob/main/Images/Delete%20places.png?raw=true" height ="400"/> 
 
 
 
 
+Addtional Features
 
-4. Updates the locations in few seconds
+-->Dynamic Updates to search 
 
-5. 
+
+<hr>
+<hr>
+<hr>
 
 
 
@@ -80,20 +103,23 @@ find Live App: https://mappy-devstudio.onrender.com/
  Important Tasks to be done to run code locally
 
  - Replace the mongoUri with your URI
- - replace all the fetch req url to local host
-eg :https:// example.com/gjgjgj t0 http:// localhost: 6969/gjgjgg
+ - replace all the fetch requests url to local host
+eg :https:// example.com/gjgjgj t0  http:// localhost:6969/gjgjgg
 
-   - comment the serveice worker file link in html pages fpr ease of dev experience
-   - 
+   - Remove the service worker script tag in HTML files while in Developer Mode 
+     
 
 # Instructions
 
 <h2>🛠️ Installation Steps:</h2>
 
+
+**Make sure Node JS is installed in your Operating System**
+
 <p>1. Step1 Fork the Repo</p>
 
 ```
-fork symbol
+Fork the project so that you can work from your repo 
 ```
 
 
@@ -103,13 +129,13 @@ fork symbol
 git.com/amppy.git
 ```
 
-<p>3. Navigate to mappy directory</p>
+<p>3. Navigate to mappy directory </p>
 
 ```
 cd ./mappy
 ```
 
-<p>4. install packgaes</p>
+<p>4. install packages</p>
 
 ```
 npm install
