@@ -138,7 +138,7 @@ Fork the project so that you can work from your repo
 <p>2. clone the repo</p>
 
 ```
-[git.com/amppy.git](https://github.com/Chay009/mappy.git)
+git clone https://github.com/Chay009/mappy.git
 ```
 
 <p>3. Navigate to mappy directory </p>
