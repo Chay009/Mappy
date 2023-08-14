@@ -74,8 +74,8 @@ const refreshTourSteps=()=>{
             },
       {
           title :`Developer`,
-          intro:"You'll Never miss an update with updating system -Made with ❣ by Chaitanya",
-          element : document.querySelector('.leaflet-control-attribution'),
+          intro:"You'll Never miss an update from us -Made with ❣ by Chaitanya",
+         
           
   
       },
