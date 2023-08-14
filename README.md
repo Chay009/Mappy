@@ -22,11 +22,30 @@ find Live App: https://mappy-devstudio.onrender.com/
 
  `User`  Features and Interfaces
 
+
+<img align="center" src="https://github.com/Chay009/mappy/blob/main/Images/andriod%20view.png?raw=true" height ="400"/>    <img align="left" src="https://github.com/Chay009/mappy/blob/main/Images/ios%20view.png?raw=true" height ="400"/> 
+
+
+ 
+
 1.User-friendly  intro guide to walk you through the app
+
+
+<img align="center" src="https://github.com/Chay009/mappy/blob/main/Images/intro%20guide.png?raw=true" alt="intro" height ="400"/>
+
+
+
 
 2. Dynamic search box gives the custom saved places by user/admin
 
+
+<img align="center" src="https://github.com/Chay009/mappy/blob/main/Images/dynamic%20search.png?raw=true" height ="400"/>
+
+
 3. Ever Felt the UI too boring you can toogle between the layers
+
+<img align="center" src="https://github.com/Chay009/mappy/blob/main/Images/street%20map%20view.png?raw=true" height ="400"/>     <img align="left" src="https://github.com/Chay009/mappy/blob/main/Images/google%20map%20view.png?raw=true" height ="400"/> 
+
 
 4. Can navigate to admin dashboard with Admin-key
 
@@ -34,13 +53,24 @@ find Live App: https://mappy-devstudio.onrender.com/
 
  `Admin`  Features and Interfaces
 
-1. Seamless add new custom places with a single click
+  <img src="https://github.com/Chay009/mappy/blob/main/Images/Admin%20page.png?raw=true" height ="400"/>
 
-2. complete control over places can-`edit` `delete` `create`
+1. Get Info of places added by simply hovering on markers
+ 
 
-3. Updates the locations in few seconds
 
-4. 
+
+3. complete control over places ,can- `create` `edit` `delete` 
+
+**CREATE** <img src="https://github.com/Chay009/mappy/blob/main/Images/Add%20places.png?raw=true"  alt="g"  height="400" > **UPDATE** <img src="https://github.com/Chay009/mappy/blob/main/Images/Update%20Places.png?raw=true" height ="400"/><img src="https://github.com/Chay009/mappy/blob/main/Images/Edit%20places.png?raw=true" height ="400"/>  **DELETE**<img src="https://github.com/Chay009/mappy/blob/main/Images/Delete%20places.png?raw=true" height ="400"/> 
+
+
+
+
+
+4. Updates the locations in few seconds
+
+5. 
 
 
 
