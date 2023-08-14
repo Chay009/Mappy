@@ -11,7 +11,9 @@
 if ('serviceWorker' in navigator) {
 
     // The UI that will be presented when an update is found
-    var presentUpdateAvailable = serviceWorker => {
+    let presentUpdateAvailable = serviceWorker => {
+        let metaThemeColor = document.querySelector("meta[name=theme-color]");
+        metaThemeColor.setAttribute("content", '#41a048');
         document.getElementById('update-banner').dataset.state = 'updateavailable';
         document.querySelector('#update-banner .headline').innerHTML = 'Update available';
         document.querySelector('#update-banner .subhead').innerHTML = 'Click here to update the app to the latest version';
