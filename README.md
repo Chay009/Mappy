@@ -1,5 +1,6 @@
-# Mappy- Map service Web App
-find Live App: https://mappy-devstudio.onrender.com/
+# Mappy -mapping and navigation app
+Find Live App: <a href="https://mappy-devstudio.onrender.com/">Mappy</a>
+
 # Submission for MLH fellowship 2023
 
 [![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/Chay009/mappy?logo=github&style=for-the-badge)](https://github.com/Chay009/) 
@@ -33,6 +34,10 @@ find Live App: https://mappy-devstudio.onrender.com/
 
 <br>
 
+* Installabe on both IOS and Andriod
+  <img align="center" src="https://github.com/Chay009/mappy/blob/main/Images/Installable.png?raw=true" alt="intro" height ="400"/>
+<br>
+
 * User-friendly intro guide to walk you through the app makes seamless User Experience 
 
 
@@ -44,14 +49,20 @@ find Live App: https://mappy-devstudio.onrender.com/
 * Dynamic search box gives the custom saved places by user/admin with routes and directions
 
 
-<img align="center" src="https://github.com/Chay009/mappy/blob/main/Images/dynamic%20search.png?raw=true" height ="400"/>
-<img align="center" src="https://github.com/Chay009/mappy/blob/main/Images/directions.png?raw=true" height ="400"/>
+<img align="center" src="https://github.com/Chay009/mappy/blob/main/Images/dynamic%20search.png?raw=true" height ="400"/>     <img align="left" src="https://github.com/Chay009/mappy/blob/main/Images/directions.png?raw=true" height ="400"/>
 
 <br>
 
 * Ever Felt the UI too boring you can toogle between layers anytime
 
 <img align="center" src="https://github.com/Chay009/mappy/blob/main/Images/street%20map%20view.png?raw=true" height ="400"/>     <img align="left" src="https://github.com/Chay009/mappy/blob/main/Images/google%20map%20view.png?raw=true" height ="400"/> 
+
+
+## Critical Feature 
+
+* Just like native apps now Mappy gets app updates to optimize the app
+
+ <img align="center" src="https://github.com/Chay009/mappy/blob/main/Images/Update.png?raw=true" alt="intro" height ="400"/>
 
 Additional Features
 
@@ -84,6 +95,7 @@ Additional Features
 **CREATE**<img  src="https://github.com/Chay009/mappy/blob/main/Images/Add%20places.png?raw=true"  alt="g"  height="400" > **UPDATE** <img  src="https://github.com/Chay009/mappy/blob/main/Images/Update%20Places.png?raw=true" height ="400"/><img src="https://github.com/Chay009/mappy/blob/main/Images/Edit%20places.png?raw=true" height ="400"/> **DELETE**<img src="https://github.com/Chay009/mappy/blob/main/Images/Delete%20places.png?raw=true" height ="400"/> 
 
 
+ 
 
 
 Addtional Features
@@ -126,7 +138,7 @@ Fork the project so that you can work from your repo
 <p>2. clone the repo</p>
 
 ```
-git.com/amppy.git
+git clone https://github.com/Chay009/mappy.git
 ```
 
 <p>3. Navigate to mappy directory </p>
@@ -172,7 +184,7 @@ node server.js
 </p>
 
 
-``Front-End`
+`Front-End`
 
 <p align="center">
 
