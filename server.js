@@ -29,7 +29,7 @@ console.log(path.join(__dirname, 'public'));
 
 
 // enabling cors for external requests
-app.use(cors());   // third party middleware
+app.use(cors());  // third party middleware
 
 
 const connectDB=require('./database/db');
