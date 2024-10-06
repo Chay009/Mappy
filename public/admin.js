@@ -224,7 +224,7 @@ const sendUserData=(event)=>{
         
         (async () => {
             try{   // During Development  BASE_URL=http://127.0.0.1:6969
-            const dataFromServer = await fetch(`https://mappy-devstudio.onrender.com/places`, {
+            const dataFromServer = await fetch(`https://mappy-maps.vercel.app/places`, {
               method: 'POST',
               headers: {
                 'Accept': 'application/json',
@@ -321,7 +321,7 @@ const deleteLocation=()=>{
 
             (async () => {
               try{   // During Development  BASE_URL=http://127.0.0.1:6969
-              const dataFromServer = await fetch(`https://mappy-devstudio.onrender.com/admin/delete`, {
+              const dataFromServer = await fetch(`https://mappy-maps.vercel.app/admin/delete`, {
                 method: 'DELETE',
                 headers: {
                   'Accept': 'application/json',
@@ -561,7 +561,7 @@ const cancelChanges=()=>{
 
         (async () => {
           try{   // During Development  BASE_URL=http://127.0.0.1:6969
-          const dataFromServer = await fetch(`https://mappy-devstudio.onrender.com/admin/update`, {
+          const dataFromServer = await fetch(`https://mappy-maps.vercel.app/admin/update`, {
             method: 'PUT',
             headers: {
               'Accept': 'application/json',
@@ -702,7 +702,7 @@ const updateToast = Swal.mixin({
                                 }
                   
                       
-                    fetch('https://mappy-devstudio.onrender.com/locations/all')
+                    fetch('https://mappy-maps.vercel.app/locations/all')
                     .then((response) => 
                           response.json()
                                                                     
