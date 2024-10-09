@@ -509,7 +509,7 @@ const showResults=(val)=> {
   }
   let placeList = '';
               // During Development  BASE_URL=http://127.0.0.1:6969
-  fetch(`https://mappy-devstudio.onrender.com/suggest?q=${val}`).then(
+  fetch(`https://mappy-maps.vercel.app/suggest?q=${val}`).then(
    function (response) {
      return response.json();
    }).then(function (data) {
@@ -558,7 +558,7 @@ const showResults=(val)=> {
 
 
  // During Development  BASE_URL=http://127.0.0.1:6969
-  fetch(`https://mappy-devstudio.onrender.com/maproute/location?q=${point}`).then((response)=>{return response.json()}).then((data)=>{
+  fetch(`https://mappy-maps.vercel.app/maproute/location?q=${point}`).then((response)=>{return response.json()}).then((data)=>{
    
   
     
@@ -607,7 +607,7 @@ let placeInfo;
    let point=document.querySelector('.search-suggest').value;
 
  // During Development  BASE_URL=http://127.0.0.1:6969
-  fetch(`https://mappy-devstudio.onrender.com/maproute/location?q=${point}`).then((response)=>{return response.json()}).then((data)=>{
+  fetch(`https://mappy-maps.vercel.app/maproute/location?q=${point}`).then((response)=>{return response.json()}).then((data)=>{
    
   
   
